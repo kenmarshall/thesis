@@ -6,7 +6,7 @@ var app = require('../server-config.js');
 
 describe('get api', function() {
 
-  it ('GET "/" should ', function(done) {
+  it ('GET "/" should return "Hello!"', function(done) {
 
     request(app)
       .get('/')
