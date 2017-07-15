@@ -12,7 +12,7 @@ describe('get api', function() {
       .get('/')
       .expect(function(result){
         // console.log('RESULT', result.text)
-        expect(result.text).to.equal('He!');
+        expect(result.text).to.equal('Hello!');
       })
     .end(done);
   });
