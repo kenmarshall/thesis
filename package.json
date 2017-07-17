@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mongo": "^0.1.0",
     "mongoose": "^4.11.2"
@@ -15,7 +16,6 @@
   },
   "scripts": {
     "test": "mocha test/server_spec.js"
-
   },
   "repository": {
     "type": "git",
