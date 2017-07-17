@@ -55,15 +55,15 @@ app.post('/logout', (req, res) => {
   });
 });
 
-app.put('/users', (req, res) => {
-  handler.update(req.body, (err, user) => {
-    if (err) {
-      console.error(err);
-      res.status(404).send();
-    } else {
-      res.status(201).send(user);
-    }
-  });
-});
+// app.put('/users/:username', (req, res) => {
+//   handler.update(req.body, (err, user) => {
+//     if (err) {
+//       console.error(err);
+//       res.status(404).send();
+//     } else {
+//       res.status(201).send(user);
+//     }
+//   });
+// });
 
 module.exports = app;
