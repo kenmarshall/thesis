@@ -1,7 +1,7 @@
 var request = require('supertest');
 var expect = require('chai').expect;
 var express = require('express');
-var User = require('../db/models/user.js')
+var User = require('../db/models/user.js');
 
 var app = require('../server-config.js');
 
@@ -14,9 +14,9 @@ describe('get api', function() {
       username: 'bobjones@bob.com',
       avoidables: ['whey'],
       password: 'test123'
-    }
+    };
     User.create(testUser, done);
-  })
+  });
 
   it ('GET "/" should return "Hello!"', function(done) {
 
@@ -40,7 +40,7 @@ describe('get api', function() {
       .end(done);
   });
 
-  it ('GET "/status" should return "Warning"', function(done) {
+  it ('GET "/status" should return "Danger"', function(done) {
 
     request(app)
       .get('/status')
@@ -64,7 +64,7 @@ describe('get api', function() {
   // it ('GET "/product" should return ', function(done) )
 
 
-  it ('POST "/signup" should return Status 200', function(done) {
+  it ('POST "/signup" should create a new user', function(done) {
     request(app)
       .post('/signup')
       .send({
@@ -77,12 +77,18 @@ describe('get api', function() {
       .expect(function() {
         User.findOne({username: 'suedough@pillsbury.com'}, function(err, user) {
           expect(err).to.be.null;
-          expect(user.first_name).to.equal.'Sue'
-        })
-      })
-  } )
+          expect(user.first_name).to.equal('Sue');
+          expect(user.last_name).to.equal('Dough');
+          expect(user.username).to.equal('suedough@pillsbury.com');
+          expect(user.avoidables).to.equal('gluten');
+          expect(user.password).to.equal('popnfresh');
+        });
+      });
+    });
 
-  it ('POST "/login" should return', function(done) )
+  // it ('POST "/login" should return', function(done) {
+
+  // })
 
   //it ('POST "/logout" should return', function(done))
 
