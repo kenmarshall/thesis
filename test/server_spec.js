@@ -1,13 +1,21 @@
 var request = require('supertest');
 var expect = require('chai').expect;
 var express = require('express');
+var User = require('../db/models/user.js')
 
 var app = require('../server-config.js');
 
 describe('get api', function() {
 
   beforeEach(function (done) {
-    var testUser = new User
+    var testUser = {
+      first_name: 'Bob',
+      last_name: 'Jones',
+      username: 'bobjones@bob.com',
+      avoidables: ['whey'],
+      password: 'test123'
+    }
+    User.create(testUser, done);
   })
 
   it ('GET "/" should return "Hello!"', function(done) {
@@ -25,6 +33,7 @@ describe('get api', function() {
 
     request(app)
       .get('/status')
+      .query({username: 'bobjones@bob.com', upc: '1254631509'}) //Dentyne Fire gum
       .expect(function(result) {
         expect(result.status).to.equal('OK');
       })
@@ -35,28 +44,45 @@ describe('get api', function() {
 
     request(app)
       .get('/status')
-      .expect(function(result) {
-        expect(result.status).to.equal('Warning');
-      })
-      .end(done);
-  });
-
-  it ('GET "/status" should return "Danger"', function(done) {
-
-    request(app)
-      .get('/status')
+      .query({username: 'bobjones@bob.com', upc: '1600044281'}) //Nature Valley Sweet & Salty Nut Bar
       .expect(function(result) {
         expect(result.status).to.equal('Danger');
       })
       .end(done);
   });
 
-  it ('GET "/product" should return ', function(done))
+  // it ('GET "/status" should return "Danger"', function(done) {
+
+  //   request(app)
+  //     .get('/status')
+  //     .expect(function(result) {
+  //       expect(result.status).to.equal('Warning');
+  //     })
+  //     .end(done);
+  // });
+
+  // it ('GET "/product" should return ', function(done) )
 
 
-  //it ('POST "/signup" should return', function(done) )
+  it ('POST "/signup" should return Status 200', function(done) {
+    request(app)
+      .post('/signup')
+      .send({
+        first_name: 'Sue',
+        last_name: 'Dough',
+        username: 'suedough@pillsbury.com',
+        avoidables: ['gluten'],
+        password: 'popnfresh'
+      })
+      .expect(function() {
+        User.findOne({username: 'suedough@pillsbury.com'}, function(err, user) {
+          expect(err).to.be.null;
+          expect(user.first_name).to.equal.'Sue'
+        })
+      })
+  } )
 
-  //it ('POST "/login" should return', function(done) )
+  it ('POST "/login" should return', function(done) )
 
   //it ('POST "/logout" should return', function(done))
 
