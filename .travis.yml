@@ -9,18 +9,32 @@ cache:
   directories:
     - "node_modules"
 
+before_deploy:
+  - zip -r latest *
+  - mkdir -p dpl_cd_upload
+  - mv latest/ThesisBackEnd.zip dpl_cd_upload/latest/ThesisBackEnd.zip
+
 deploy:
       - provider: s3
         ⋮ # rest of S3 deployment for MyApp.zip
       - provider: codedeploy
-        access_key_id: "AKIAIBOP55MKHDDOWYCQ"
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
         bucket: "kmsquared"
+        local_dir: dpl_cd_upload
         key: latest/MyApp.zip
         application: ThesisBackEnd
         region: us-east-2
-        on: 2*
+        on:
+          repo: KMS-Squared/thesis
+          all_branches: true
 
-script:
-  - zip -r latest *
-  - mkdir -p dpl_cd_upload
-  - mv latest/MyApp.zip dpl_cd_upload/latest/MyApp.zip
+after_deploy:
+  - echo "Performing after deploy procedures..."
+
+notifications:
+  email:
+    recipients:
+      - suyatdesign@gmail.com
+
+
