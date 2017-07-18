@@ -10,24 +10,28 @@ cache:
     - "node_modules"
 
 before_deploy:
-  - zip -r latest *
-  - mkdir -p dpl_cd_upload
-  - mv latest/ThesisBackEnd.zip dpl_cd_upload/latest/ThesisBackEnd.zip
+  - zip -r latest ThesisBackEnd.zip
+  - mkdir -p "dpl_cd_upload"
+  - mv ThesisBackEnd.zip dpl_cd_upload/ThesisBackEnd.zip
 
 deploy:
-      - provider: s3
-        ⋮ # rest of S3 deployment for MyApp.zip
-      - provider: codedeploy
-        access_key_id: $AWS_ACCESS_KEY
-        secret_access_key: $AWS_SECRET_KEY
-        bucket: "kmsquared"
-        local_dir: dpl_cd_upload
-        key: latest/MyApp.zip
-        application: ThesisBackEnd
-        region: us-east-2
-        on:
-          repo: KMS-Squared/thesis
-          all_branches: true
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    local_dir: dpl_cd_upload
+    bucket: kmsquared
+    region: us-east-2
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: kmsquared
+    key: ThesisBackEnd.zip
+    bundle_type: zip
+    application: ThesisBackEnd
+    region: us-east-2
+    on:
+      repo: KMS-Squared/thesis
+      all_branches: true
 
 after_deploy:
   - echo "Performing after deploy procedures..."
