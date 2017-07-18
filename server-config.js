@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
   res.send('Hello!');
 });
 
+
 app.get('/status', (req, res) => {
   handler.getStatus(req.body, (err, status) => {
     if (err) {
@@ -43,6 +44,7 @@ app.post('/login', (req, res) => {
     }
   });
 });
+
 
 app.post('/logout', (req, res) => {
   handler.logout(req.body, (err, status) => {
