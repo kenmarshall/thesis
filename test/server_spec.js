@@ -30,19 +30,19 @@ describe('get api', function() {
       .end(done);
   });
 
-  // it ('GET "/status" should return "OK"', function(done) {
-  //   this.timeout(15500);
-  //   request(app)
-  //     .get('/status')
-  //     .query({username: 'bobjones@bob.com', upc: '1254631509'}) //Dentyne Fire gum
-  //     .expect(function(result) {
-  //      // console.log(result);
-  //       expect(result.body.status).to.equal('OK');
-  //       //done();
-  //     })
-  //     .end(done);
+  it ('GET "/status" should return "OK"', function(done) {
+    this.timeout(15500);
+    request(app)
+      .get('/status')
+      .query({username: 'bobjones@bob.com', upc: '1254631509'}) //Dentyne Fire gum
+      .expect(function(result) {
+       // console.log(result);
+        expect(result.body.status).to.equal('OK');
+        //done();
+      })
+      .end(done);
 
-  // });
+  });
 
   // // it ('GET "/status" should return "Danger"', function(done) {
 
