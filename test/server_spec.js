@@ -16,6 +16,7 @@ describe('get api', function() {
       password: 'test123'
     };
     User.create(testUser, done);
+    done();
   });
 
   it ('GET "/" should return "Hello!"', function(done) {
@@ -29,69 +30,69 @@ describe('get api', function() {
       .end(done);
   });
 
-  it ('GET "/status" should return "OK"', function(done) {
-    this.timeout(15500);
-    request(app)
-      .get('/status')
-      .query({username: 'bobjones@bob.com', upc: '1254631509'}) //Dentyne Fire gum
-      .expect(function(result) {
-       // console.log(result);
-        expect(result.body.status).to.equal('OK');
-        //done();
-      })
-      .end(done);
-
-  });
-
-  // it ('GET "/status" should return "Danger"', function(done) {
-
+  // it ('GET "/status" should return "OK"', function(done) {
+  //   this.timeout(15500);
   //   request(app)
   //     .get('/status')
-  //     .query({username: 'bobjones@bob.com', upc: '1600044281'}) //Nature Valley Sweet & Salty Nut Bar
+  //     .query({username: 'bobjones@bob.com', upc: '1254631509'}) //Dentyne Fire gum
   //     .expect(function(result) {
-  //       expect(result.status).to.equal('Danger');
+  //      // console.log(result);
+  //       expect(result.body.status).to.equal('OK');
   //       //done();
   //     })
   //     .end(done);
 
   // });
 
-  // it ('GET "/status" should return "Danger"', function(done) {
+  // // it ('GET "/status" should return "Danger"', function(done) {
 
+  // //   request(app)
+  // //     .get('/status')
+  // //     .query({username: 'bobjones@bob.com', upc: '1600044281'}) //Nature Valley Sweet & Salty Nut Bar
+  // //     .expect(function(result) {
+  // //       expect(result.status).to.equal('Danger');
+  // //       //done();
+  // //     })
+  // //     .end(done);
+
+  // // });
+
+  // // it ('GET "/status" should return "Danger"', function(done) {
+
+  // //   request(app)
+  // //     .get('/status')
+  // //     .expect(function(result) {
+  // //       expect(result.status).to.equal('Warning');
+  // //     })
+  // //     .end(done);
+  // // });
+
+  // // it ('GET "/product" should return ', function(done) )
+
+
+  // it ('POST "/signup" should create a new user', function(done) {
   //   request(app)
-  //     .get('/status')
-  //     .expect(function(result) {
-  //       expect(result.status).to.equal('Warning');
+  //     .post('/signup')
+  //     .send({
+  //       first_name: 'Sue',
+  //       last_name: 'Dough',
+  //       username: 'suedough@pillsbury.com',
+  //       avoidables: ['gluten'],
+  //       password: 'popnfresh'
+  //     })
+  //     .expect(function() {
+  //       User.findOne({username: 'suedough@pillsbury.com'}, function(err, user) {
+  //         expect(err).to.be.null;
+  //         expect(user.first_name).to.equal('Sue');
+  //         expect(user.last_name).to.equal('Dough');
+  //         expect(user.username).to.equal('suedough@pillsbury.com');
+  //         expect(user.avoidables).to.equal('gluten');
+  //         expect(user.password).to.equal('popnfresh');
+  //         //done();
+  //       });
   //     })
   //     .end(done);
-  // });
-
-  // it ('GET "/product" should return ', function(done) )
-
-
-  it ('POST "/signup" should create a new user', function(done) {
-    request(app)
-      .post('/signup')
-      .send({
-        first_name: 'Sue',
-        last_name: 'Dough',
-        username: 'suedough@pillsbury.com',
-        avoidables: ['gluten'],
-        password: 'popnfresh'
-      })
-      .expect(function() {
-        User.findOne({username: 'suedough@pillsbury.com'}, function(err, user) {
-          expect(err).to.be.null;
-          expect(user.first_name).to.equal('Sue');
-          expect(user.last_name).to.equal('Dough');
-          expect(user.username).to.equal('suedough@pillsbury.com');
-          expect(user.avoidables).to.equal('gluten');
-          expect(user.password).to.equal('popnfresh');
-          //done();
-        });
-      })
-      .end(done);
-    });
+  //   });
 
   // it ('POST "/login" should return', function(done) {
 
