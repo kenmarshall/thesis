@@ -17,28 +17,24 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  ProductGuardian
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  An easy-to-use barcode scanner for people with food allergies and ingredient sensitivities.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  ProductGuardian makes it simple for consumers to avoid allergens and other ingredients they'd like to skip in everyday products.  This smartphone app allows shoppers to scan barcodes and get instant results if a product matches pre-selected ingredients that might be unsafe for them. ProductGuardian saves consumers from squinting at labels and saves them time.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  Consumers with allergies or other sensitivities need a quick way to check if a product is safe for them or their loved ones to use.  In reading labels, it's easy to misread and miss a key ingredient in a long list. Or ingredients can be identified by multiple names.  
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
-
+ ProductGuardian removes the need for guesswork and reading long ingredient lists in tiny print.  Scan the barcode, and you'll get an instant notification of whether the product is safe for you. Getting started is as easy as signing in with Google, and inputting your allergies.
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
-
+  We built ProductGuardian with our own families and friends in mind, to keep them safe. 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-
+  Go to our web site and download the app.  Then start scanning.
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-
+Before Product Guardian I either had to stick to a few foods I knew or spend hours reading labels. Now I can shop quickly and easily check out new foods.
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
