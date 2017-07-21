@@ -44,18 +44,18 @@ describe('get api', function() {
 
   });
 
-  // // it ('GET "/status" should return "Danger"', function(done) {
+  it ('GET "/status" should return "Danger"', function(done) {
 
-  // //   request(app)
-  // //     .get('/status')
-  // //     .query({username: 'bobjones@bob.com', upc: '1600044281'}) //Nature Valley Sweet & Salty Nut Bar
-  // //     .expect(function(result) {
-  // //       expect(result.status).to.equal('Danger');
-  // //       //done();
-  // //     })
-  // //     .end(done);
+    request(app)
+      .get('/status')
+      .query({username: 'bobjones@bob.com', upc: '1600044281'}) //Nature Valley Sweet & Salty Nut Bar
+      .expect(function(result) {
+        expect(result.status).to.equal('Danger');
+        //done();
+      })
+      .end(done);
 
-  // // });
+  });
 
   // // it ('GET "/status" should return "Danger"', function(done) {
 
