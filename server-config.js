@@ -7,8 +7,10 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname + '/public'));
 
-app.get('/', (req, res) => {
+
+app.get('/test', (req, res) => {
   res.send('Hello!');
 });
 
