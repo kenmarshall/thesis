@@ -19,6 +19,7 @@ app.post('/signup',  handler.signup);
 
 app.post('/login', handler.login);
 
+app.put('/edit-profile', handler.editProfile);
 
 //app.post('/logout', handler.logout);
 
