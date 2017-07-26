@@ -50,12 +50,12 @@ describe('get api', function() {
   });
 
   it ('GET "/status" should return "Danger"', function(done) {
-
+    this.timeout(15500);
     request(app)
       .get('/status')
-      .query({username: 'bobjones@bob.com', upc: '1600044281'}) //Nature Valley Sweet & Salty Nut Bar
+      .query({user_id: '1234', upc: '1600044281'}) //Nature Valley Sweet & Salty Nut Bar
       .expect(function(result) {
-        expect(result.body.status).to.equal('Danger');
+        expect(result.body.status).to.equal('DANGER');
         //done();
       })
       .end(done);
