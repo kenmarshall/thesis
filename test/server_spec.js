@@ -8,21 +8,26 @@ var app = require('../server-config.js');
 describe('get api', function() {
 
   beforeEach(function (done) {
+
     var testUser = {
+      user_id: '1234',
       first_name: 'Bob',
       last_name: 'Jones',
       username: 'bobjones@bob.com',
       avoidables: ['whey'],
       password: 'test123'
     };
+
+
+
     User.create(testUser, done);
-    done();
+
   });
 
-  it ('GET "/" should return "Hello!"', function(done) {
+  it ('GET "/test" should return "Hello!"', function(done) {
 
     request(app)
-      .get('/')
+      .get('/test')
       .expect(function(result) {
         // console.log('RESULT', result.text)
         expect(result.text).to.equal('Hello!');
@@ -34,7 +39,7 @@ describe('get api', function() {
     this.timeout(15500);
     request(app)
       .get('/status')
-      .query({username: 'bobjones@bob.com', upc: '1254631509'}) //Dentyne Fire gum
+      .query({user_id: '1234', upc: '1254631509'}) //Dentyne Fire gum
       .expect(function(result) {
        // console.log(result);
         expect(result.body.status).to.equal('OK');
@@ -50,7 +55,7 @@ describe('get api', function() {
       .get('/status')
       .query({username: 'bobjones@bob.com', upc: '1600044281'}) //Nature Valley Sweet & Salty Nut Bar
       .expect(function(result) {
-        expect(result.status).to.equal('Danger');
+        expect(result.body.status).to.equal('Danger');
         //done();
       })
       .end(done);

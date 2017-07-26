@@ -23,6 +23,11 @@ app.post('/login', handler.login);
 
 app.put('/edit-profile', handler.editProfile);
 
+app.post('/favorites', handler.addFavorites);
+app.delete('/favorties', handler.deleteFavorites);
+
+app.get('/feeds', handler.getFeeds);
+
 //app.post('/logout', handler.logout);
 
 // app.put('/users/:username', (req, res) => {
