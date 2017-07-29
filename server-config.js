@@ -27,7 +27,4 @@ app.delete('/favorites', handler.deleteFavorites);
 
 app.get('/feeds', handler.getFeeds);
 
-//app.post('/logout', handler.logout);
-
 module.exports = app;
-
