@@ -21,6 +21,8 @@ app.post('/login', handler.login);
 
 app.put('/edit-profile', handler.editProfile);
 
+app.get('/favorites', handler.getFavorites);
+
 app.post('/favorites', handler.addFavorites);
 
 app.delete('/favorites', handler.deleteFavorites);

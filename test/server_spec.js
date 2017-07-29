@@ -1,30 +1,44 @@
 var request = require('supertest');
+var mongoose = require('mongoose');
 var expect = require('chai').expect;
 var express = require('express');
 var User = require('../db/models/user.js');
+var Product = require('../db/models/product.js');
 
 var app = require('../server-config.js');
+
+var clearDB = function (done) {
+  mongoose.connection.collections['users'].remove(done);
+};
 
 describe('get api', function() {
 
   beforeEach(function (done) {
+    clearDB(function(){
+      var newProd = new Product({upc: '1254631509', title: 'Dentyne Fire gum' });
+      newProd.save(function(err, product){
+        var testUser = {
+          user_id: '1234',
+          first_name: 'Bob',
+          last_name: 'Jones',
+          username: 'bobjones@bob.com',
+          avoidables: ['whey'],
+          password: 'test123'
+        };
 
-    var testUser = {
-      user_id: '1234',
-      first_name: 'Bob',
-      last_name: 'Jones',
-      username: 'bobjones@bob.com',
-      avoidables: ['whey'],
-      password: 'test123'
-    };
+        var user = new User(testUser);
+        user.favorites.push(product._id);
+        user.save(done);
+
+      });
 
 
 
-    User.create(testUser, done);
 
+    });
   });
 
-  it ('GET "/test" should return "Hello!"', function(done) {
+  xit('GET "/test" should return "Hello!"', function(done) {
 
     request(app)
       .get('/test')
@@ -35,7 +49,7 @@ describe('get api', function() {
       .end(done);
   });
 
-  it ('GET "/status" should return "OK"', function(done) {
+  xit('GET "/status" should return "OK"', function(done) {
     this.timeout(15500);
     request(app)
       .get('/status')
@@ -49,7 +63,7 @@ describe('get api', function() {
 
   });
 
-  it ('GET "/status" should return "Danger"', function(done) {
+  xit('GET "/status" should return "Danger"', function(done) {
     this.timeout(15500);
     request(app)
       .get('/status')
@@ -57,6 +71,58 @@ describe('get api', function() {
       .expect(function(result) {
         expect(result.body.status).to.equal('DANGER');
         //done();
+      })
+      .end(done);
+
+  });
+
+  it ('Post "/favorites" should add a product to user favorites', function(done) {
+    this.timeout(25500);
+    request(app)
+      .post('/favorites')
+      .send({
+        upc: '1600044281',
+        title: 'Nature Valley Sweet & Salty Nut Bar',
+        user_id: '1234'
+      })
+      .expect(function(result) {
+        expect(result.body.status).to.equal('success');
+
+        User.findOne({user_id:'1234'}).populate('favorites').exec(function(err, user){
+          expect(user.favorites).to.be.an('array').that.is.not.empty;
+          expect(user.favorites[1].title).to.equal('Nature Valley Sweet & Salty Nut Bar');
+        });
+      })
+      .end(done);
+
+  });
+
+  it ('Get "/favorites" should return list of favorites for user', function(done) {
+    this.timeout(25500);
+
+     request(app)
+      .post('/favorites')
+      .send({
+        upc: '1600044281',
+        title: 'Nature Valley Sweet & Salty Nut Bar',
+        user_id: '1234'
+      })
+      .expect(function(result) {
+        expect(result.body.status).to.equal('success');
+
+        User.findOne({user_id:'1234'}).populate('favorites').exec(function(err, user){
+          expect(user.favorites).to.be.an('array').that.is.not.empty;
+          expect(user.favorites[0].title).to.equal('');
+        });
+      })
+    request(app)
+      .get('/favorites')
+      .query({
+        user_id: '1234'
+      })
+      .expect(function(result) {
+        expect(result.body).to.be.an('array').that.is.not.empty;
+        expect(result.body[0].title).to.equal('Dentyne Fire gum');
       })
       .end(done);
 
