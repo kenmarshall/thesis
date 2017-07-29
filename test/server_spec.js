@@ -32,13 +32,10 @@ describe('get api', function() {
 
       });
 
-
-
-
     });
   });
 
-  xit('GET "/test" should return "Hello!"', function(done) {
+  it('GET "/test" should return "Hello!"', function(done) {
 
     request(app)
       .get('/test')
@@ -49,7 +46,7 @@ describe('get api', function() {
       .end(done);
   });
 
-  xit('GET "/status" should return "OK"', function(done) {
+  it('GET "/status" should return "OK"', function(done) {
     this.timeout(15500);
     request(app)
       .get('/status')
@@ -63,7 +60,7 @@ describe('get api', function() {
 
   });
 
-  xit('GET "/status" should return "Danger"', function(done) {
+  it('GET "/status" should return "Danger"', function(done) {
     this.timeout(15500);
     request(app)
       .get('/status')

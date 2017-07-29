@@ -23,7 +23,7 @@ UserSchema.statics.getMatchedAvoidables = function(user_id, ingredients, callbac
     let foundAvoidables = [];
 
     if (user && user.avoidables.length) {
-      foundAvoidables = util.ingredientsMatched(product.ingredients, user.avoidables);
+      foundAvoidables = util.ingredientsMatched(ingredients, user.avoidables);
     }
 
     callback(foundAvoidables);
