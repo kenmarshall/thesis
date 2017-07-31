@@ -5,6 +5,9 @@ var db = require ('../config');
 var ProductSchema = new Schema({
   upc: String,
   title: String,
+  brand: String,
+  category: String,
+  sub_catergory: String,
   image: String,
   info: String,
   nutrients: [],
