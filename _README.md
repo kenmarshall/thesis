@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Kenneth Marshall
+  - __Scrum Master__: Semie Rodgers
+  - __Development Team Members__: Sheena Ramirez, Mark Suyat
 
 ## Table of Contents
 
@@ -24,11 +24,8 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 6.x
+- Mongod 3.4.x
 
 ## Development
 
@@ -37,9 +34,8 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
-npm install
-bower install
+sudo npm install -g node mongod
+
 ```
 
 ### Roadmap
