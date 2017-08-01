@@ -27,6 +27,16 @@ app.post('/favorites', handler.addFavorites);
 
 app.delete('/favorites', handler.deleteFavorites);
 
+app.get('/shopping-list', handler.getShoppingList);
+
+app.post('/shopping-list', handler.addToShoppingList);
+
+app.delete('/shopping-list', handler.deleteFromShoppingList);
+
+app.post('/shopping-list/email', handler.emailShoppingList);
+
+app.post('/shopping-list/text', handler.textShoppingList);
+
 app.get('/feeds', handler.getFeeds);
 
 module.exports = app;

@@ -15,7 +15,8 @@ var UserSchema = new Schema({
   avatar: String,
   avoidables: [String],
   history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
-  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+  shopping_list: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
 });
 
 UserSchema.statics.getMatchedAvoidables = function(user_id, ingredients, callback) {

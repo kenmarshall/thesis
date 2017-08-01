@@ -4,5 +4,7 @@ bower_components/
 package-lock.json
 config/
 
+.env
+
 build/
 dist/
