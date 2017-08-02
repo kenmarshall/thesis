@@ -1,8 +1,8 @@
-# Project Name
+# Product Guardian Api
 
-> Pithy project description
+> Restful API for Product Guardian app. https://github.com/KMS-Squared/ProductGuardian
 
-## Team
+## Team KMS-Squared
 
   - __Product Owner__: Kenneth Marshall
   - __Scrum Master__: Semie Rodgers
@@ -14,13 +14,13 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
 ## Usage
 
-> Some usage instructions
+> curl
+
 
 ## Requirements
 
@@ -35,6 +35,7 @@ From within the root directory:
 
 ```sh
 sudo npm install -g node mongod
+npm start
 
 ```
 
