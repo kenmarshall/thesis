@@ -13,6 +13,8 @@ app.get('/test', (req, res) => {
   res.send('Hello!');
 });
 
+app.get('/modelTest', handler.testModel);
+
 app.get('/status', handler.getStatus);
 
 app.post('/signup',  handler.signup);
