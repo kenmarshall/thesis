@@ -2,7 +2,7 @@ node_modules/
 bower_components/
 *.log
 package-lock.json
-config/
+foodAPI.js
 
 .env
 
