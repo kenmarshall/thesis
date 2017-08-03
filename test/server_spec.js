@@ -7,11 +7,15 @@ var Product = require('../db/models/product.js');
 
 var app = require('../server-config.js');
 
+
 var clearDB = function (done) {
-  mongoose.connection.collections['users'].remove(done);
+  //mongoose.connection.db.dropCollection('usersdb', done);
+  //mongoose.connection.collections['products'].remove(done);
+  mongoose.connection.db.dropDatabase(done);
 };
 
 describe('get api', function() {
+  var productID;
 
   beforeEach(function (done) {
     clearDB(function(){
@@ -27,6 +31,7 @@ describe('get api', function() {
         };
 
         var user = new User(testUser);
+        productID = product._id;
         user.favorites.push(product._id);
         user.save(done);
 
@@ -46,7 +51,7 @@ describe('get api', function() {
       .end(done);
   });
 
-  it('GET "/status" should return "OK"', function(done) {
+  xit('GET "/status" should return "OK"', function(done) {
     this.timeout(15500);
     request(app)
       .get('/status')
@@ -78,16 +83,16 @@ describe('get api', function() {
     request(app)
       .post('/favorites')
       .send({
-        upc: '1600044281',
-        title: 'Nature Valley Sweet & Salty Nut Bar',
+        product_id: productID,
         user_id: '1234'
       })
       .expect(function(result) {
         expect(result.body.status).to.equal('success');
 
         User.findOne({user_id:'1234'}).populate('favorites').exec(function(err, user){
+          //console.log(user);
           expect(user.favorites).to.be.an('array').that.is.not.empty;
-          expect(user.favorites[1].title).to.equal('Nature Valley Sweet & Salty Nut Bar');
+          expect(user.favorites[0].title).to.equal('Dentyne Fire gum');
         });
       })
       .end(done);
@@ -95,35 +100,64 @@ describe('get api', function() {
   });
 
   it ('Get "/favorites" should return list of favorites for user', function(done) {
-    this.timeout(25500);
+      this.timeout(25500);
 
-     request(app)
+       request(app)
       .post('/favorites')
       .send({
-        upc: '1600044281',
-        title: 'Nature Valley Sweet & Salty Nut Bar',
+        product_id: productID,
+        user_id: '1234'
+      })
+      .expect(function(result) {
+        expect(result.body.status).to.equal('success');
+        console.log('fav added');
+
+        request(app)
+        .get('/favorites')
+        .send({
+          user_id: '1234'
+        })
+        .expect(function(result) {
+          expect(result.body.status).to.equal('success');
+
+          User.findOne({user_id:'1234'}).populate('favorites').exec(function(err, user){
+            console.log(user);
+            expect(user.favorites).to.be.an('array').that.is.not.empty;
+            expect(user.favorites[0].title).to.exist;
+            expect(user.favorites[0].title).to.equal('Dentyne Fire gum');
+          });
+        })
+        .end(done);
+
+
+      })
+
+
+
+
+    });
+
+  it ('Delete "/favorites" should delete all user favorites', function(done) {
+    this.timeout(25500);
+    //console.log(productID);
+    request(app)
+      .delete('/favorites')
+      .send({
         user_id: '1234'
       })
       .expect(function(result) {
         expect(result.body.status).to.equal('success');
 
         User.findOne({user_id:'1234'}).populate('favorites').exec(function(err, user){
-          expect(user.favorites).to.be.an('array').that.is.not.empty;
-          expect(user.favorites[0].title).to.equal('');
+          //console.log(user);
+          expect(user.favorites).to.be.an('array').that.is.empty;
         });
-      })
-    request(app)
-      .get('/favorites')
-      .query({
-        user_id: '1234'
-      })
-      .expect(function(result) {
-        expect(result.body).to.be.an('array').that.is.not.empty;
-        expect(result.body[0].title).to.equal('Dentyne Fire gum');
       })
       .end(done);
 
   });
+
+
 
   // // it ('GET "/status" should return "Danger"', function(done) {
 
