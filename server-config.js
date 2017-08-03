@@ -23,17 +23,24 @@ app.post('/login', handler.login);
 
 app.put('/edit-profile', handler.editProfile);
 
+
 app.get('/favorites', handler.getFavorites);
 
 app.post('/favorites', handler.addFavorites);
 
+app.delete('/favorite', handler.deleteFavorite);
+
 app.delete('/favorites', handler.deleteFavorites);
+
 
 app.get('/shopping-list', handler.getShoppingList);
 
 app.post('/shopping-list', handler.addToShoppingList);
 
-app.delete('/shopping-list', handler.deleteFromShoppingList);
+app.delete('/shopping-list-item', handler.deleteShoppingListItem);
+
+app.delete('/shopping-list', handler.deleteShoppingList);
+
 
 app.post('/shopping-list/email', handler.emailShoppingList);
 
